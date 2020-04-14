@@ -8,8 +8,9 @@ namespace MIS4200Team3.Models
 {
     public class Profile
     {
-        [Key]
-        public int profileID { get; set; }
+        [Required]
+        public Guid ID { get; set; }
+
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "First name is required")]
         [StringLength(20)]
@@ -48,7 +49,7 @@ namespace MIS4200Team3.Models
         public string phone { get; set; }
         [Display(Name = "Hire Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString ="{0:MM/dd/yyyy", ApplyFormatInEditMode =true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> dateofEmployment { get; set; }
     }
 }

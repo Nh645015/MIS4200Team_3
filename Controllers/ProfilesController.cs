@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using MIS4200Team3.DAL;
 using MIS4200Team3.Models;
 
@@ -22,7 +23,7 @@ namespace MIS4200Team3.Controllers
         }
 
         // GET: Profiles/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
@@ -47,20 +48,34 @@ namespace MIS4200Team3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "profileID,firstName,lastName,email,password,Street,City,State,phone,dateofEmployment")] Profile profile)
+        public ActionResult Create([Bind(Include = "ID,firstName,lastName,email,password,Street,City,State,phone,dateofEmployment")] Profile profile)
         {
             if (ModelState.IsValid)
             {
+                //profile.ID = Guid.NewGuid();
+                Guid memberID;
+                Guid.TryParse(User.Identity.GetUserId(), out memberID);
+                profile.ID = memberID;
                 db.Profiles.Add(profile);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+
+                    return View("DuplicateUser");
+                }
+                
+                
             }
 
             return View(profile);
         }
 
         // GET: Profiles/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
@@ -79,7 +94,7 @@ namespace MIS4200Team3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "profileID,firstName,lastName,email,password,Street,City,State,phone,dateofEmployment")] Profile profile)
+        public ActionResult Edit([Bind(Include = "ID,firstName,lastName,email,password,Street,City,State,phone,dateofEmployment")] Profile profile)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +106,7 @@ namespace MIS4200Team3.Controllers
         }
 
         // GET: Profiles/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
@@ -108,7 +123,7 @@ namespace MIS4200Team3.Controllers
         // POST: Profiles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Guid id)
         {
             Profile profile = db.Profiles.Find(id);
             db.Profiles.Remove(profile);
