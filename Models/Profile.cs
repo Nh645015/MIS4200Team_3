@@ -51,5 +51,10 @@ namespace MIS4200Team3.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> dateofEmployment { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string fullName { get { return firstName + lastName; } }
+
+        public ICollection<Recognition> Recognition { get; set; }
     }
 }

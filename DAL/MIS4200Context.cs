@@ -26,5 +26,8 @@ namespace MIS4200Team3.DAL
             base.OnModelCreating(modelBuilder);
         }
 
+        public System.Data.Entity.DbSet<MIS4200Team3.Models.Values> Values { get; set; }
+
+        public System.Data.Entity.DbSet<MIS4200Team3.Models.Recognition> Recognitions { get; set; }
     }
 }
