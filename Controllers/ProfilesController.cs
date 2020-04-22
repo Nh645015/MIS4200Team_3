@@ -19,7 +19,15 @@ namespace MIS4200Team3.Controllers
         // GET: Profiles
         public ActionResult Index()
         {
-            return View(db.Profiles.ToList());
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(db.Profiles.ToList());
+            }
+            else
+            {
+                return View("NotAuthenticated");
+            }
+            
         }
 
         // GET: Profiles/Details/5
@@ -67,8 +75,6 @@ namespace MIS4200Team3.Controllers
 
                     return View("DuplicateUser");
                 }
-                
-                
             }
 
             return View(profile);
@@ -86,7 +92,16 @@ namespace MIS4200Team3.Controllers
             {
                 return HttpNotFound();
             }
-            return View(profile);
+            Guid memberID;
+            Guid.TryParse(User.Identity.GetUserId(), out memberID);
+            if (profile.ID == memberID)
+            {
+                return View(profile);
+            }
+            else
+            {
+                return View("NotAuthenticated");
+            }
         }
 
         // POST: Profiles/Edit/5

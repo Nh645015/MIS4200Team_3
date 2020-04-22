@@ -48,8 +48,7 @@ namespace MIS4200Team3.Models
             ErrorMessage = "Phone numbers must be in format (xxx) xxx-xxxx or xxx-xxx-xxxx")]
         public string phone { get; set; }
         [Display(Name = "Hire Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> dateofEmployment { get; set; }
 
         [Display(Name = "Full Name")]
