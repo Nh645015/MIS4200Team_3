@@ -9,10 +9,11 @@ namespace MIS4200Team3.Migrations.MISContext
     {
         public Configuration()
         {
-            AutomaticMigrationDataLossAllowed = true;
+            
             AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"Migrations\MISContext";
             ContextKey = "MIS4200Team3.DAL.MIS4200Context";
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(MIS4200Team3.DAL.MIS4200Context context)
