@@ -20,7 +20,6 @@ namespace MIS4200Team3.Models
         [StringLength(20)]
         public string lastName { get; set; }
         [Display(Name = "Most used email")]
-        [Required]
         [EmailAddress(ErrorMessage = "Enter you most frequently used email address")]
         public string email { get; set; }
         [Display(Name = "Password")]
