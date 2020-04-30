@@ -24,7 +24,6 @@ namespace MIS4200Team3.Models
         public string email { get; set; }
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Please enter your password!")]
         [StringLength(20)]
         
         public string password { get; set; }

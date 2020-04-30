@@ -18,8 +18,16 @@ namespace MIS4200Team3.Controllers
         // GET: Recognitions
         public ActionResult Index()
         {
-            var recognitions = db.Recognitions.Include(r => r.Profile).Include(r => r.Values);
-            return View(recognitions.ToList());
+            if (User.Identity.IsAuthenticated)
+            {
+                var recognitions = db.Recognitions.Include(r => r.Profile).Include(r => r.Values);
+                return View(recognitions.ToList());
+            }
+            else
+            {
+                return View("NotAuthenticated");
+            }
+
         }
 
         // GET: Recognitions/Details/5
@@ -40,9 +48,17 @@ namespace MIS4200Team3.Controllers
         // GET: Recognitions/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.Profiles, "ID", "fullName");
-            ViewBag.valueID = new SelectList(db.Values, "valueID", "coreValue");
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.ID = new SelectList(db.Profiles, "ID", "fullName");
+                ViewBag.valueID = new SelectList(db.Values, "valueID", "coreValue");
+                return View();
+            }
+            else
+            {
+                return View("NotAuthenticated");
+            }
+
         }
 
         // POST: Recognitions/Create

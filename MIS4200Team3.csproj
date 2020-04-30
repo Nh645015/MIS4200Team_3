@@ -262,6 +262,7 @@
     <Content Include="Views\Recognitions\Edit.cshtml" />
     <Content Include="Views\Recognitions\Index.cshtml" />
     <Content Include="Views\Profiles\NotAuthenticated.cshtml" />
+    <Content Include="Views\Recognitions\NotAuthenticated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
